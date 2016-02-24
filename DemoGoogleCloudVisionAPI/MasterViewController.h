@@ -2,7 +2,7 @@
 //  MasterViewController.h
 //  DemoGoogleCloudVisionAPI
 //
-//  Created by AlanYen on 2016/2/24.
+//  Created by Alan.Yen on 2016/2/24.
 //  Copyright © 2016年 17Life. All rights reserved.
 //
 
@@ -13,7 +13,6 @@
 @interface MasterViewController : UITableViewController
 
 @property (strong, nonatomic) DetailViewController *detailViewController;
-
 
 @end
 

@@ -16,6 +16,14 @@
 		2D5C39161C7D51E6002ED441 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D5C39141C7D51E6002ED441 /* LaunchScreen.storyboard */; };
 		2D5C39211C7D51E6002ED441 /* DemoGoogleCloudVisionAPITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5C39201C7D51E6002ED441 /* DemoGoogleCloudVisionAPITests.m */; };
 		2D5C392C1C7D51E6002ED441 /* DemoGoogleCloudVisionAPIUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5C392B1C7D51E6002ED441 /* DemoGoogleCloudVisionAPIUITests.m */; };
+		2D5C394D1C7D6C89002ED441 /* GCVBoundingPoly.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5C393E1C7D6C89002ED441 /* GCVBoundingPoly.m */; };
+		2D5C394E1C7D6C89002ED441 /* GCVFaceAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5C39411C7D6C89002ED441 /* GCVFaceAnnotation.m */; };
+		2D5C394F1C7D6C89002ED441 /* GCVFdBoundingPoly.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5C39431C7D6C89002ED441 /* GCVFdBoundingPoly.m */; };
+		2D5C39501C7D6C89002ED441 /* GCVLandmarks.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5C39451C7D6C89002ED441 /* GCVLandmarks.m */; };
+		2D5C39511C7D6C89002ED441 /* GCVPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5C39471C7D6C89002ED441 /* GCVPosition.m */; };
+		2D5C39521C7D6C89002ED441 /* GCVFaceDetection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5C39491C7D6C89002ED441 /* GCVFaceDetection.m */; };
+		2D5C39531C7D6C89002ED441 /* GCVVertices.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5C394B1C7D6C89002ED441 /* GCVVertices.m */; };
+		2D5C39561C7D883C002ED441 /* GCVRootModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5C39551C7D883C002ED441 /* GCVRootModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +62,22 @@
 		2D5C39271C7D51E6002ED441 /* DemoGoogleCloudVisionAPIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DemoGoogleCloudVisionAPIUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D5C392B1C7D51E6002ED441 /* DemoGoogleCloudVisionAPIUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoGoogleCloudVisionAPIUITests.m; sourceTree = "<group>"; };
 		2D5C392D1C7D51E6002ED441 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2D5C393D1C7D6C89002ED441 /* GCVBoundingPoly.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCVBoundingPoly.h; sourceTree = "<group>"; };
+		2D5C393E1C7D6C89002ED441 /* GCVBoundingPoly.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCVBoundingPoly.m; sourceTree = "<group>"; };
+		2D5C39401C7D6C89002ED441 /* GCVFaceAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCVFaceAnnotation.h; sourceTree = "<group>"; };
+		2D5C39411C7D6C89002ED441 /* GCVFaceAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCVFaceAnnotation.m; sourceTree = "<group>"; };
+		2D5C39421C7D6C89002ED441 /* GCVFdBoundingPoly.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCVFdBoundingPoly.h; sourceTree = "<group>"; };
+		2D5C39431C7D6C89002ED441 /* GCVFdBoundingPoly.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCVFdBoundingPoly.m; sourceTree = "<group>"; };
+		2D5C39441C7D6C89002ED441 /* GCVLandmarks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCVLandmarks.h; sourceTree = "<group>"; };
+		2D5C39451C7D6C89002ED441 /* GCVLandmarks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCVLandmarks.m; sourceTree = "<group>"; };
+		2D5C39461C7D6C89002ED441 /* GCVPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCVPosition.h; sourceTree = "<group>"; };
+		2D5C39471C7D6C89002ED441 /* GCVPosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCVPosition.m; sourceTree = "<group>"; };
+		2D5C39481C7D6C89002ED441 /* GCVFaceDetection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCVFaceDetection.h; sourceTree = "<group>"; };
+		2D5C39491C7D6C89002ED441 /* GCVFaceDetection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCVFaceDetection.m; sourceTree = "<group>"; };
+		2D5C394A1C7D6C89002ED441 /* GCVVertices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCVVertices.h; sourceTree = "<group>"; };
+		2D5C394B1C7D6C89002ED441 /* GCVVertices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCVVertices.m; sourceTree = "<group>"; };
+		2D5C39541C7D883C002ED441 /* GCVRootModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCVRootModel.h; sourceTree = "<group>"; };
+		2D5C39551C7D883C002ED441 /* GCVRootModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCVRootModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +128,7 @@
 		2D5C39021C7D51E6002ED441 /* DemoGoogleCloudVisionAPI */ = {
 			isa = PBXGroup;
 			children = (
+				2D5C39391C7D6C89002ED441 /* Model */,
 				2D5C39061C7D51E6002ED441 /* AppDelegate.h */,
 				2D5C39071C7D51E6002ED441 /* AppDelegate.m */,
 				2D5C39091C7D51E6002ED441 /* MasterViewController.h */,
@@ -143,6 +168,37 @@
 				2D5C392D1C7D51E6002ED441 /* Info.plist */,
 			);
 			path = DemoGoogleCloudVisionAPIUITests;
+			sourceTree = "<group>";
+		};
+		2D5C39391C7D6C89002ED441 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2D5C393A1C7D6C89002ED441 /* FaceDetection */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2D5C393A1C7D6C89002ED441 /* FaceDetection */ = {
+			isa = PBXGroup;
+			children = (
+				2D5C393D1C7D6C89002ED441 /* GCVBoundingPoly.h */,
+				2D5C393E1C7D6C89002ED441 /* GCVBoundingPoly.m */,
+				2D5C39401C7D6C89002ED441 /* GCVFaceAnnotation.h */,
+				2D5C39411C7D6C89002ED441 /* GCVFaceAnnotation.m */,
+				2D5C39421C7D6C89002ED441 /* GCVFdBoundingPoly.h */,
+				2D5C39431C7D6C89002ED441 /* GCVFdBoundingPoly.m */,
+				2D5C39441C7D6C89002ED441 /* GCVLandmarks.h */,
+				2D5C39451C7D6C89002ED441 /* GCVLandmarks.m */,
+				2D5C39461C7D6C89002ED441 /* GCVPosition.h */,
+				2D5C39471C7D6C89002ED441 /* GCVPosition.m */,
+				2D5C39481C7D6C89002ED441 /* GCVFaceDetection.h */,
+				2D5C39491C7D6C89002ED441 /* GCVFaceDetection.m */,
+				2D5C394A1C7D6C89002ED441 /* GCVVertices.h */,
+				2D5C394B1C7D6C89002ED441 /* GCVVertices.m */,
+				2D5C39541C7D883C002ED441 /* GCVRootModel.h */,
+				2D5C39551C7D883C002ED441 /* GCVRootModel.m */,
+			);
+			path = FaceDetection;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -275,10 +331,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D5C39501C7D6C89002ED441 /* GCVLandmarks.m in Sources */,
+				2D5C39521C7D6C89002ED441 /* GCVFaceDetection.m in Sources */,
 				2D5C39081C7D51E6002ED441 /* AppDelegate.m in Sources */,
 				2D5C390B1C7D51E6002ED441 /* MasterViewController.m in Sources */,
+				2D5C394E1C7D6C89002ED441 /* GCVFaceAnnotation.m in Sources */,
+				2D5C39511C7D6C89002ED441 /* GCVPosition.m in Sources */,
 				2D5C39051C7D51E6002ED441 /* main.m in Sources */,
 				2D5C390E1C7D51E6002ED441 /* DetailViewController.m in Sources */,
+				2D5C394D1C7D6C89002ED441 /* GCVBoundingPoly.m in Sources */,
+				2D5C39531C7D6C89002ED441 /* GCVVertices.m in Sources */,
+				2D5C39561C7D883C002ED441 /* GCVRootModel.m in Sources */,
+				2D5C394F1C7D6C89002ED441 /* GCVFdBoundingPoly.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
