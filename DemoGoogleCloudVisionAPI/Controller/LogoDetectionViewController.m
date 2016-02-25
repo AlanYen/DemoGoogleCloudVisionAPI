@@ -50,6 +50,7 @@
              [textString appendString:[@(annotation.score) stringValue]];
              [textString appendString:@")"];
              [textString appendString:@"\n"];
+             [textString appendString:@"\n"];
          }
          weakSelf.textView.text = textString;
          

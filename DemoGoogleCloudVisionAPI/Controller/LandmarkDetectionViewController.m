@@ -61,6 +61,7 @@
              [textString appendString:@","];
              [textString appendString:[@(locationInfo.latLng.longitude) stringValue]];
              [textString appendString:@"\n"];
+             [textString appendString:@"\n"];
          }
          weakSelf.textView.text = textString;
          

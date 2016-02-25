@@ -53,7 +53,7 @@
     static NSURL *baseURL;
     if (!baseURL) {
         NSString *urlString = @"https://vision.googleapis.com/v1/images:annotate?key=";
-        NSString *API_KEY = @"xxx";
+        NSString *API_KEY = @"AIzaSyCwYUfEuhdoNq0cgSXEGA9UsFD1HGtEB4Y";
         baseURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", urlString, API_KEY]];
     }
     return baseURL;
