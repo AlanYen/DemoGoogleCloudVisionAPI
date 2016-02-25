@@ -19,6 +19,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //
+    // Refernce:
+    // https://github.com/GoogleCloudPlatform/cloud-vision/blob/master/ios/Objective-C/README.md
+    //
 
     self.title = @"Google Cloud Vision API";
     

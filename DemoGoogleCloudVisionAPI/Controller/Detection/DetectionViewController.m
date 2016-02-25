@@ -99,6 +99,7 @@
     self.imageView.image = self.image;
     self.imageViewWidthConstraint.constant = self.image.size.width;
     self.imageViewHeightConstraint.constant = self.image.size.height;
+    self.textView.text = @"";
 }
 
 - (void)processDetection {
