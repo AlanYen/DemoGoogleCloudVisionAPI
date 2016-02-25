@@ -6,12 +6,11 @@
 //
 
 #import "GCVEntityDetection.h"
-#import "GCVFaceAnnotation.h"
 
-@interface GCVFaceDetection : GCVEntityDetection
+@interface GCVLabelDetection : GCVEntityDetection
 
-- (void)getFaceDetection:(NSString *)imageString
-               maxResult:(NSInteger)maxResult
+- (void)getLabelDetection:(NSString *)imageString
+                maxResult:(NSInteger)maxResult
               completion:(void (^)(NSDictionary *errorDict))completion;
 
 @end

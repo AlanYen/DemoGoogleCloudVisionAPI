@@ -16,21 +16,16 @@ NSString *const kGCVFaceDetectionFaceAnnotations = @"faceAnnotations";
 
 @implementation GCVFaceDetection
 
-- (void)initWithDictionary:(NSDictionary *)dict {
-    if ([dict isKindOfClass:[NSDictionary class]]) {
-        NSObject *receivedFaceAnnotations = [dict objectForKey:kGCVFaceDetectionFaceAnnotations];
-        NSMutableArray *parsedFaceAnnotations = [NSMutableArray array];
-        if ([receivedFaceAnnotations isKindOfClass:[NSArray class]]) {
-            for (NSDictionary *item in (NSArray *)receivedFaceAnnotations) {
-                if ([item isKindOfClass:[NSDictionary class]]) {
-                    [parsedFaceAnnotations addObject:[GCVFaceAnnotation modelObjectWithDictionary:item]];
-                }
-            }
-        } else if ([receivedFaceAnnotations isKindOfClass:[NSDictionary class]]) {
-            [parsedFaceAnnotations addObject:[GCVFaceAnnotation modelObjectWithDictionary:(NSDictionary *)receivedFaceAnnotations]];
-        }
-        self.faceAnnotations = [NSArray arrayWithArray:parsedFaceAnnotations];
-    }
++ (NSString *)annotationName {
+    return @"faceAnnotations";
+}
+
++ (Class)annotationClass {
+    return [GCVFaceAnnotation class];
+}
+
++ (NSString *)actionTypeName {
+    return @"FACE_DETECTION";
 }
 
 - (void)getFaceDetection:(NSString *)imageString

@@ -6,9 +6,6 @@
 //
 
 #import "GCVFaceAnnotation.h"
-#import "GCVLandmarks.h"
-#import "GCVBoundingPoly.h"
-#import "GCVFdBoundingPoly.h"
 
 NSString *const kGCVFaceAnnotationsHeadwearLikelihood = @"headwearLikelihood";
 NSString *const kGCVFaceAnnotationsSurpriseLikelihood = @"surpriseLikelihood";
@@ -26,12 +23,6 @@ NSString *const kGCVFaceAnnotationsTiltAngle = @"tiltAngle";
 NSString *const kGCVFaceAnnotationsUnderExposedLikelihood = @"underExposedLikelihood";
 NSString *const kGCVFaceAnnotationsBlurredLikelihood = @"blurredLikelihood";
 
-@interface GCVFaceAnnotation ()
-
-- (id)objectOrNilForKey:(id)aKey fromDictionary:(NSDictionary *)dict;
-
-@end
-
 @implementation GCVFaceAnnotation
 
 + (instancetype)modelObjectWithDictionary:(NSDictionary *)dict {
@@ -40,8 +31,6 @@ NSString *const kGCVFaceAnnotationsBlurredLikelihood = @"blurredLikelihood";
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict {
     self = [super init];
-    // This check serves to make sure that a non-NSDictionary object
-    // passed into the model class doesn't break the parsing.
     if (self && [dict isKindOfClass:[NSDictionary class]]) {
         self.headwearLikelihood = [self objectOrNilForKey:kGCVFaceAnnotationsHeadwearLikelihood fromDictionary:dict];
         self.surpriseLikelihood = [self objectOrNilForKey:kGCVFaceAnnotationsSurpriseLikelihood fromDictionary:dict];
@@ -53,11 +42,11 @@ NSString *const kGCVFaceAnnotationsBlurredLikelihood = @"blurredLikelihood";
         if ([receivedLandmarks isKindOfClass:[NSArray class]]) {
             for (NSDictionary *item in (NSArray *)receivedLandmarks) {
                 if ([item isKindOfClass:[NSDictionary class]]) {
-                    [parsedLandmarks addObject:[GCVLandmarks modelObjectWithDictionary:item]];
+                    [parsedLandmarks addObject:[GCVLandmark modelObjectWithDictionary:item]];
                 }
             }
         } else if ([receivedLandmarks isKindOfClass:[NSDictionary class]]) {
-            [parsedLandmarks addObject:[GCVLandmarks modelObjectWithDictionary:(NSDictionary *)receivedLandmarks]];
+            [parsedLandmarks addObject:[GCVLandmark modelObjectWithDictionary:(NSDictionary *)receivedLandmarks]];
         }
         
         self.landmarks = [NSArray arrayWithArray:parsedLandmarks];
@@ -72,13 +61,6 @@ NSString *const kGCVFaceAnnotationsBlurredLikelihood = @"blurredLikelihood";
         self.blurredLikelihood = [self objectOrNilForKey:kGCVFaceAnnotationsBlurredLikelihood fromDictionary:dict];
     }
     return self;
-}
-
-#pragma mark - Helper Method
-
-- (id)objectOrNilForKey:(id)aKey fromDictionary:(NSDictionary *)dict {
-    id object = [dict objectForKey:aKey];
-    return [object isEqual:[NSNull null]] ? nil : object;
 }
 
 @end

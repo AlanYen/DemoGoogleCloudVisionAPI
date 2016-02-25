@@ -5,11 +5,12 @@
 //  Copyright (c) 2016 17Life All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "GCVRootObject.h"
+#import "GCVBoundingPoly.h"
+#import "GCVFdBoundingPoly.h"
+#import "GCVLandmark.h"
 
-@class GCVBoundingPoly, GCVFdBoundingPoly;
-
-@interface GCVFaceAnnotation : NSObject
+@interface GCVFaceAnnotation : GCVRootObject
 
 @property (strong, nonatomic) NSString *headwearLikelihood;
 @property (strong, nonatomic) NSString *surpriseLikelihood;
