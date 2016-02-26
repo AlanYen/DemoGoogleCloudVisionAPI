@@ -41,20 +41,24 @@
     self.logoDetection = [[GCVLogoDetection alloc] init];
     [self.logoDetection getLogoDetection:[self base64EncodeImage:self.image]
                                maxResult:10
-                              completion:^(NSDictionary *errorDict)
+                              completion:^(GCVError *error)
      {
-         NSMutableString *textString = [NSMutableString new];
-         for (GCVEntityAnnotation *annotation in weakSelf.logoDetection.annotations) {
-             [textString appendString:annotation.annotationsDescription];
-             [textString appendString:@" ("];
-             [textString appendString:[@(annotation.score) stringValue]];
-             [textString appendString:@")"];
-             [textString appendString:@"\n"];
-             [textString appendString:@"\n"];
-         }
-         weakSelf.textView.text = textString;
-         
          [SVProgressHUD dismiss];
+         if (error) {
+             weakSelf.textView.text = error.message;
+         }
+         else {
+             NSMutableString *textString = [NSMutableString new];
+             for (GCVEntityAnnotation *annotation in weakSelf.logoDetection.annotations) {
+                 [textString appendString:annotation.annotationsDescription];
+                 [textString appendString:@" ("];
+                 [textString appendString:[@(annotation.score) stringValue]];
+                 [textString appendString:@")"];
+                 [textString appendString:@"\n"];
+                 [textString appendString:@"\n"];
+             }
+             weakSelf.textView.text = textString;
+         }
      }];
 }
 

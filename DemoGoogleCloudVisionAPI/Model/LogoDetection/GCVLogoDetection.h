@@ -11,6 +11,6 @@
 
 - (void)getLogoDetection:(NSString *)imageString
                maxResult:(NSInteger)maxResult
-              completion:(void (^)(NSDictionary *errorDict))completion;
+              completion:(void (^)(GCVError *error))completion;
 
 @end

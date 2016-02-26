@@ -8,6 +8,7 @@
 
 #import "DetectionViewController.h"
 #import "SVProgressHUD.h"
+#import "GCVError.h"
 
 @interface DetectionViewController () <UIImagePickerControllerDelegate,
                                        UINavigationControllerDelegate>

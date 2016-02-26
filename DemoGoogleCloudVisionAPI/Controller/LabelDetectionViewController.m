@@ -41,19 +41,23 @@
     self.labelDetection = [[GCVLabelDetection alloc] init];
     [self.labelDetection getLabelDetection:[self base64EncodeImage:self.image]
                                  maxResult:10
-                                completion:^(NSDictionary *errorDict)
+                                completion:^(GCVError *error)
      {
-         NSMutableString *textString = [NSMutableString new];
-         for (GCVEntityAnnotation *annotation in weakSelf.labelDetection.annotations) {
-             [textString appendString:annotation.annotationsDescription];
-             [textString appendString:@" ("];
-             [textString appendString:[@(annotation.score) stringValue]];
-             [textString appendString:@")"];
-             [textString appendString:@"\n"];
-         }
-         weakSelf.textView.text = textString;
-         
          [SVProgressHUD dismiss];
+         if (error) {
+             weakSelf.textView.text = error.message;
+         }
+         else {
+             NSMutableString *textString = [NSMutableString new];
+             for (GCVEntityAnnotation *annotation in weakSelf.labelDetection.annotations) {
+                 [textString appendString:annotation.annotationsDescription];
+                 [textString appendString:@" ("];
+                 [textString appendString:[@(annotation.score) stringValue]];
+                 [textString appendString:@")"];
+                 [textString appendString:@"\n"];
+             }
+             weakSelf.textView.text = textString;
+         }
      }];
 }
 

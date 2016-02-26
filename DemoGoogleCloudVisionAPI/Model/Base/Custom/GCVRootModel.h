@@ -6,8 +6,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GCVError.h"
 
-typedef void (^GCVCompletionBlock)(NSDictionary *responseDict, NSDictionary *errorDict);
+typedef void (^GCVCompletionBlock)(NSDictionary *responseDict, GCVError *error);
 
 @interface GCVRootModel : NSObject
 

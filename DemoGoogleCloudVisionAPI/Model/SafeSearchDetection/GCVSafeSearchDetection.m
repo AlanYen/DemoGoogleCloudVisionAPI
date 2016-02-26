@@ -27,7 +27,7 @@
 
 - (void)getSafeSearchDetection:(NSString *)imageString
                      maxResult:(NSInteger)maxResult
-                    completion:(void (^)(NSDictionary *errorDict))completion {
+                    completion:(void (^)(GCVError *error))completion {
     [self getEntityDetection:imageString
                    maxResult:maxResult
                   completion:completion];

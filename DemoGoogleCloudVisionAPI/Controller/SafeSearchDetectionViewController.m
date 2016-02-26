@@ -41,30 +41,34 @@
     self.safeSearchDetection = [[GCVSafeSearchDetection alloc] init];
     [self.safeSearchDetection getSafeSearchDetection:[self base64EncodeImage:self.image]
                                        maxResult:10
-                                      completion:^(NSDictionary *errorDict)
+                                      completion:^(GCVError *error)
      {
-         NSMutableString *textString = [NSMutableString new];
-         for (GCVSafeSearchAnnotation *annotation in weakSelf.safeSearchDetection.annotations) {
-             
-             [textString appendString:@"spoof: ("];
-             [textString appendString:annotation.spoof];
-             [textString appendString:@")\n"];
-             
-             [textString appendString:@"medical: ("];
-             [textString appendString:annotation.medical];
-             [textString appendString:@")\n"];
-
-             [textString appendString:@"adult: ("];
-             [textString appendString:annotation.adult];
-             [textString appendString:@")\n"];
-             
-             [textString appendString:@"violence: ("];
-             [textString appendString:annotation.violence];
-             [textString appendString:@")\n"];
-         }
-         weakSelf.textView.text = textString;
-         
          [SVProgressHUD dismiss];
+         if (error) {
+             weakSelf.textView.text = error.message;
+         }
+         else {
+             NSMutableString *textString = [NSMutableString new];
+             for (GCVSafeSearchAnnotation *annotation in weakSelf.safeSearchDetection.annotations) {
+                 
+                 [textString appendString:@"spoof: ("];
+                 [textString appendString:annotation.spoof];
+                 [textString appendString:@")\n"];
+                 
+                 [textString appendString:@"medical: ("];
+                 [textString appendString:annotation.medical];
+                 [textString appendString:@")\n"];
+                 
+                 [textString appendString:@"adult: ("];
+                 [textString appendString:annotation.adult];
+                 [textString appendString:@")\n"];
+                 
+                 [textString appendString:@"violence: ("];
+                 [textString appendString:annotation.violence];
+                 [textString appendString:@")\n"];
+             }
+             weakSelf.textView.text = textString;
+         }
      }];
 }
 

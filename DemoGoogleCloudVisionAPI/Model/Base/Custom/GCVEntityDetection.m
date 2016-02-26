@@ -49,15 +49,15 @@
 
 - (void)getEntityDetection:(NSString *)imageString
                  maxResult:(NSInteger)maxResult
-                completion:(void (^)(NSDictionary *errorDict))completion {
+                completion:(void (^)(GCVError *error))completion {
     
     [[self class] sendPostRequestWithBaseURL:[GCVRootModel baseURL]
                                       action:[[self class] actionTypeName]
                                    imageData:imageString
                                    maxResult:maxResult
-                                  completion:^(NSDictionary *responseDict, NSDictionary *errorDict)
+                                  completion:^(NSDictionary *responseDict, GCVError *error)
      {
-         if (responseDict && !errorDict) {
+         if (responseDict && !error) {
              [self initWithDictionary:responseDict];
              if (completion) {
                  dispatch_sync(dispatch_get_main_queue(), ^{
@@ -68,7 +68,7 @@
          else {
              if (completion) {
                  dispatch_sync(dispatch_get_main_queue(), ^{
-                     completion(errorDict);
+                     completion(error);
                  });
              }
          }

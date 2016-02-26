@@ -30,15 +30,15 @@ NSString *const kGCVFaceDetectionFaceAnnotations = @"faceAnnotations";
 
 - (void)getFaceDetection:(NSString *)imageString
                maxResult:(NSInteger)maxResult
-              completion:(void (^)(NSDictionary *errorDict))completion {
+              completion:(void (^)(GCVError *error))completion {
     if (completion) {
         [[self class] sendPostRequestWithBaseURL:[GCVRootModel baseURL]
                                           action:@"FACE_DETECTION"
                                        imageData:imageString
                                        maxResult:maxResult
-                                      completion:^(NSDictionary *responseDict, NSDictionary *errorDict)
+                                      completion:^(NSDictionary *responseDict, GCVError *error)
          {
-             if (responseDict && !errorDict) {
+             if (responseDict && !error) {
                  [self initWithDictionary:responseDict];
                  if (completion) {
                      dispatch_sync(dispatch_get_main_queue(), ^{
@@ -49,7 +49,7 @@ NSString *const kGCVFaceDetectionFaceAnnotations = @"faceAnnotations";
              else {
                  if (completion) {
                      dispatch_sync(dispatch_get_main_queue(), ^{
-                         completion(errorDict);
+                         completion(error);
                      });
                  }
              }

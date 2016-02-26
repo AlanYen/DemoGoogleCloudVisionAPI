@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		08D0125F8C68E03F384CC754 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 25374DD9EC7445CD14DE1E27 /* libPods.a */; };
+		2D2341D41C7FEBFC003486EC /* BaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D2341CA1C7FEBFC003486EC /* BaseClass.m */; };
+		2D2341D51C7FEBFC003486EC /* Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D2341CC1C7FEBFC003486EC /* Color.m */; };
+		2D2341D61C7FEBFC003486EC /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D2341CE1C7FEBFC003486EC /* Colors.m */; };
+		2D2341D71C7FEBFC003486EC /* DominantColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D2341D11C7FEBFC003486EC /* DominantColors.m */; };
+		2D2341D81C7FEBFC003486EC /* ImagePropertiesAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D2341D31C7FEBFC003486EC /* ImagePropertiesAnnotation.m */; };
+		2D2341E41C7FEDCC003486EC /* GCVDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D2341DE1C7FEDCC003486EC /* GCVDetail.m */; };
+		2D2341E51C7FEDCC003486EC /* GCVError.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D2341E01C7FEDCC003486EC /* GCVError.m */; };
+		2D2341E61C7FEDCC003486EC /* GCVLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D2341E21C7FEDCC003486EC /* GCVLink.m */; };
 		2D5C39051C7D51E6002ED441 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5C39041C7D51E6002ED441 /* main.m */; };
 		2D5C39081C7D51E6002ED441 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5C39071C7D51E6002ED441 /* AppDelegate.m */; };
 		2D5C39111C7D51E6002ED441 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D5C390F1C7D51E6002ED441 /* Main.storyboard */; };
@@ -65,6 +73,23 @@
 /* Begin PBXFileReference section */
 		25374DD9EC7445CD14DE1E27 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		25C650DCC55624BAB0228891 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		2D2341C91C7FEBFC003486EC /* BaseClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseClass.h; sourceTree = "<group>"; };
+		2D2341CA1C7FEBFC003486EC /* BaseClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseClass.m; sourceTree = "<group>"; };
+		2D2341CB1C7FEBFC003486EC /* Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Color.h; sourceTree = "<group>"; };
+		2D2341CC1C7FEBFC003486EC /* Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Color.m; sourceTree = "<group>"; };
+		2D2341CD1C7FEBFC003486EC /* Colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Colors.h; sourceTree = "<group>"; };
+		2D2341CE1C7FEBFC003486EC /* Colors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Colors.m; sourceTree = "<group>"; };
+		2D2341CF1C7FEBFC003486EC /* DataModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataModels.h; sourceTree = "<group>"; };
+		2D2341D01C7FEBFC003486EC /* DominantColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DominantColors.h; sourceTree = "<group>"; };
+		2D2341D11C7FEBFC003486EC /* DominantColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DominantColors.m; sourceTree = "<group>"; };
+		2D2341D21C7FEBFC003486EC /* ImagePropertiesAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePropertiesAnnotation.h; sourceTree = "<group>"; };
+		2D2341D31C7FEBFC003486EC /* ImagePropertiesAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePropertiesAnnotation.m; sourceTree = "<group>"; };
+		2D2341DD1C7FEDCC003486EC /* GCVDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCVDetail.h; sourceTree = "<group>"; };
+		2D2341DE1C7FEDCC003486EC /* GCVDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCVDetail.m; sourceTree = "<group>"; };
+		2D2341DF1C7FEDCC003486EC /* GCVError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCVError.h; sourceTree = "<group>"; };
+		2D2341E01C7FEDCC003486EC /* GCVError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCVError.m; sourceTree = "<group>"; };
+		2D2341E11C7FEDCC003486EC /* GCVLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCVLink.h; sourceTree = "<group>"; };
+		2D2341E21C7FEDCC003486EC /* GCVLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCVLink.m; sourceTree = "<group>"; };
 		2D5C39001C7D51E6002ED441 /* DemoGoogleCloudVisionAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoGoogleCloudVisionAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D5C39041C7D51E6002ED441 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2D5C39061C7D51E6002ED441 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -164,6 +189,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D2341C81C7FEBFC003486EC /* ImageProperty */ = {
+			isa = PBXGroup;
+			children = (
+				2D2341C91C7FEBFC003486EC /* BaseClass.h */,
+				2D2341CA1C7FEBFC003486EC /* BaseClass.m */,
+				2D2341CB1C7FEBFC003486EC /* Color.h */,
+				2D2341CC1C7FEBFC003486EC /* Color.m */,
+				2D2341CD1C7FEBFC003486EC /* Colors.h */,
+				2D2341CE1C7FEBFC003486EC /* Colors.m */,
+				2D2341CF1C7FEBFC003486EC /* DataModels.h */,
+				2D2341D01C7FEBFC003486EC /* DominantColors.h */,
+				2D2341D11C7FEBFC003486EC /* DominantColors.m */,
+				2D2341D21C7FEBFC003486EC /* ImagePropertiesAnnotation.h */,
+				2D2341D31C7FEBFC003486EC /* ImagePropertiesAnnotation.m */,
+			);
+			path = ImageProperty;
+			sourceTree = "<group>";
+		};
+		2D2341D91C7FEDCC003486EC /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				2D2341DD1C7FEDCC003486EC /* GCVDetail.h */,
+				2D2341DE1C7FEDCC003486EC /* GCVDetail.m */,
+				2D2341DF1C7FEDCC003486EC /* GCVError.h */,
+				2D2341E01C7FEDCC003486EC /* GCVError.m */,
+				2D2341E11C7FEDCC003486EC /* GCVLink.h */,
+				2D2341E21C7FEDCC003486EC /* GCVLink.m */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
 		2D5C38F71C7D51E6002ED441 = {
 			isa = PBXGroup;
 			children = (
@@ -232,6 +288,7 @@
 			isa = PBXGroup;
 			children = (
 				2D752FE21C7EEAC800125025 /* Base */,
+				2D2341C81C7FEBFC003486EC /* ImageProperty */,
 				2DE40B5B1C7EF382009EB669 /* SafeSearchDetection */,
 				2D7530051C7EEB2300125025 /* LandmarkDetection */,
 				2D752FA31C7ED54D00125025 /* LogoDetection */,
@@ -305,6 +362,7 @@
 		2D752FE21C7EEAC800125025 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				2D2341D91C7FEDCC003486EC /* Error */,
 				2D752FE31C7EEAC800125025 /* Custom */,
 				2D752FE81C7EEAC800125025 /* GCVBoundingPoly.h */,
 				2D752FE91C7EEAC800125025 /* GCVBoundingPoly.m */,
@@ -568,17 +626,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D2341E51C7FEDCC003486EC /* GCVError.m in Sources */,
 				2D75300B1C7EEB9900125025 /* LandmarkDetectionViewController.m in Sources */,
+				2D2341D51C7FEBFC003486EC /* Color.m in Sources */,
 				2D752FA91C7ED54D00125025 /* GCVLogoDetection.m in Sources */,
 				2D752F7A1C7EA09800125025 /* FaceDetectionViewController.m in Sources */,
 				2DE40B6C1C7F06D4009EB669 /* GCVRootObject.m in Sources */,
 				2DE40B641C7EF825009EB669 /* SafeSearchDetectionViewController.m in Sources */,
 				2DE40B5E1C7EF382009EB669 /* GCVSafeSearchAnnotation.m in Sources */,
+				2D2341D61C7FEBFC003486EC /* Colors.m in Sources */,
 				2D7530041C7EEAC800125025 /* GCVVertice.m in Sources */,
+				2D2341D81C7FEBFC003486EC /* ImagePropertiesAnnotation.m in Sources */,
 				2DE40B691C7EFF3A009EB669 /* DetectionViewController.m in Sources */,
 				2D752FFB1C7EEAC800125025 /* GCVRootModel.m in Sources */,
 				2D5C39521C7D6C89002ED441 /* GCVFaceDetection.m in Sources */,
 				2D5C39081C7D51E6002ED441 /* AppDelegate.m in Sources */,
+				2D2341D71C7FEBFC003486EC /* DominantColors.m in Sources */,
 				2D752FFA1C7EEAC800125025 /* GCVEntityDetection.m in Sources */,
 				2D752FA21C7EBE1400125025 /* TextDetectionViewController.m in Sources */,
 				2DE40B611C7EF4B2009EB669 /* GCVSafeSearchDetection.m in Sources */,
@@ -590,13 +653,16 @@
 				2D752FFF1C7EEAC800125025 /* GCVLandmark.m in Sources */,
 				2D7530021C7EEAC800125025 /* GCVPosition.m in Sources */,
 				2D5C394E1C7D6C89002ED441 /* GCVFaceAnnotation.m in Sources */,
+				2D2341E61C7FEDCC003486EC /* GCVLink.m in Sources */,
 				2D752F8E1C7EB56800125025 /* GCVLabelDetection.m in Sources */,
+				2D2341E41C7FEDCC003486EC /* GCVDetail.m in Sources */,
 				2D5C39051C7D51E6002ED441 /* main.m in Sources */,
 				2D752FE11C7EE83F00125025 /* LogoDetectionViewController.m in Sources */,
 				2D752FFE1C7EEAC800125025 /* GCVFdBoundingPoly.m in Sources */,
 				2D752F9F1C7EBD0300125025 /* GCVTextDetection.m in Sources */,
 				2D7530011C7EEAC800125025 /* GCVLocationInfo.m in Sources */,
 				2D7530001C7EEAC800125025 /* GCVLatLng.m in Sources */,
+				2D2341D41C7FEBFC003486EC /* BaseClass.m in Sources */,
 				2D752F7E1C7EA0C300125025 /* LabelDetectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

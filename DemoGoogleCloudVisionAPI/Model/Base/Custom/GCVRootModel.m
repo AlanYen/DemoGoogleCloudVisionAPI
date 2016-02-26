@@ -34,14 +34,41 @@
         [[NSURLSession sharedSession] dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
          {
-             NSError *e = nil;
-             NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&e];
-             NSArray *responses = [json objectForKey:@"responses"];
-             NSDictionary *responseDict = [responses objectAtIndex:0];
-             NSDictionary *errorDict = [json objectForKey:@"error"];
              if (completion) {
-                 NSLog(@"%@", [responseDict description]);
-                 completion(responseDict, errorDict);
+                 if (error) {
+                     GCVError *networkError = [[GCVError alloc] init];
+                     networkError.message = @"Network Error";
+                     completion(nil, networkError);
+                 }
+                 else {
+                     NSError *e = nil;
+                     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&e];
+                     if (!json || e) {
+                         GCVError *parseError = [[GCVError alloc] init];
+                         parseError.message = @"Data Format Error";
+                         completion(nil, parseError);
+                     }
+                     else {
+                         NSLog(@"%@", [json description]);
+                         
+                         NSArray *responses = [json objectForKey:@"responses"];
+                         NSDictionary *responseDict = (responses.count > 0) ? [responses firstObject] : nil;
+                         NSDictionary *errorDict = [json objectForKey:@"error"];
+                         if (responseDict && !errorDict) {
+                             if (responseDict.allKeys.count == 0) {
+                                 GCVError *noResultError = [[GCVError alloc] init];
+                                 noResultError.message = @"No Result";
+                                 completion(nil, noResultError);
+                             }
+                             else {
+                                 completion(responseDict, nil);
+                             }
+                         }
+                         else {
+                             completion(nil, [GCVError modelObjectWithDictionary:errorDict]);
+                         }
+                     }
+                 }
              }
          }];
         
@@ -53,7 +80,7 @@
     static NSURL *baseURL;
     if (!baseURL) {
         NSString *urlString = @"https://vision.googleapis.com/v1/images:annotate?key=";
-        NSString *API_KEY = @"AIzaSyCwYUfEuhdoNq0cgSXEGA9UsFD1HGtEB4Y";
+        NSString *API_KEY = @"xxx";
         baseURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", urlString, API_KEY]];
     }
     return baseURL;

@@ -30,6 +30,7 @@
     self.objects = @[@"Face Detection",
                      @"Label Detection",
                      @"Text Detection (OCR)",
+                         
                      @"Logo Detection (商標)",
                      @"Landmark Detection (地標)",
                      @"Safe Search Detection"];

@@ -41,27 +41,29 @@
     self.textDetection = [[GCVTextDetection alloc] init];
     [self.textDetection getTextDetection:[self base64EncodeImage:self.image]
                                maxResult:20
-                              completion:^(NSDictionary *errorDict)
+                              completion:^(GCVError *error)
      {
+         [SVProgressHUD dismiss];
+         
          [weakSelf removeBoundaryView];
          
-         weakSelf.imageView.image = weakSelf.image;
-         weakSelf.imageViewWidthConstraint.constant = self.image.size.width;
-         weakSelf.imageViewHeightConstraint.constant = self.image.size.height;
-         
-         NSMutableString *textString = [NSMutableString new];
-         for (GCVEntityAnnotation *annotation in weakSelf.textDetection.annotations) {
-             [textString appendString:annotation.annotationsDescription];
-             [textString appendString:@" ("];
-             [textString appendString:annotation.locale];
-             [textString appendString:@")"];
-             [textString appendString:@"\n"];
+         if (error) {
+             weakSelf.textView.text = error.message;
          }
-         weakSelf.textView.text = textString;
-         
-         [weakSelf addBoundaryView];
-         
-         [SVProgressHUD dismiss];
+         else {
+             NSMutableString *textString = [NSMutableString new];
+             for (GCVEntityAnnotation *annotation in weakSelf.textDetection.annotations) {
+                 [textString appendString:annotation.annotationsDescription];
+                 [textString appendString:@" ("];
+                 [textString appendString:@"Language: "];
+                 [textString appendString:annotation.locale];
+                 [textString appendString:@")"];
+                 [textString appendString:@"\n"];
+             }
+             weakSelf.textView.text = textString;
+             
+             [weakSelf addBoundaryView];
+         }
      }];
 }
 
