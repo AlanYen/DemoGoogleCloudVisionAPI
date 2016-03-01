@@ -38,43 +38,46 @@
     
     [self beforeDtection];
     
-    __weak LandmarkDetectionViewController *weakSelf = self;
-    self.landmarkDetection = [[GCVLandmarkDetection alloc] init];
-    [self.landmarkDetection getLandmarkDetection:[self preProcessImage]
-                                       maxResult:10
-                                      completion:^(GCVError *error)
-     {
-         [SVProgressHUD dismiss];
-         
-         [weakSelf afterDtection];
-         
-         if (error) {
-             weakSelf.textView.text = error.message;
-         }
-         else {
-             NSMutableString *textString = [NSMutableString new];
-             for (GCVEntityAnnotation *annotation in weakSelf.landmarkDetection.annotations) {
-                 if (annotation.annotationsDescription.length <= 0) {
-                     continue;
-                 }
-                 
-                 [textString appendString:annotation.annotationsDescription];
-                 [textString appendString:@" ("];
-                 [textString appendString:[@(annotation.score) stringValue]];
-                 [textString appendString:@")"];
-                 [textString appendString:@"\n"];
-                 
-                 GCVLocationInfo *locationInfo = (GCVLocationInfo *)[annotation.locations firstObject];
-                 [textString appendString:@"Location:"];
-                 [textString appendString:[@(locationInfo.latLng.latitude) stringValue]];
-                 [textString appendString:@","];
-                 [textString appendString:[@(locationInfo.latLng.longitude) stringValue]];
-                 [textString appendString:@"\n"];
-                 [textString appendString:@"\n"];
+    [self preProcessImage:^(NSString *imageString) {
+        
+        __weak LandmarkDetectionViewController *weakSelf = self;
+        self.landmarkDetection = [[GCVLandmarkDetection alloc] init];
+        [self.landmarkDetection getLandmarkDetection:imageString
+                                           maxResult:10
+                                          completion:^(GCVError *error)
+         {
+             [SVProgressHUD dismiss];
+             
+             [weakSelf afterDtection];
+             
+             if (error) {
+                 weakSelf.textView.text = error.message;
              }
-             weakSelf.textView.text = textString;
-         }
-     }];
+             else {
+                 NSMutableString *textString = [NSMutableString new];
+                 for (GCVEntityAnnotation *annotation in weakSelf.landmarkDetection.annotations) {
+                     if (annotation.annotationsDescription.length <= 0) {
+                         continue;
+                     }
+                     
+                     [textString appendString:annotation.annotationsDescription];
+                     [textString appendString:@" ("];
+                     [textString appendString:[@(annotation.score) stringValue]];
+                     [textString appendString:@")"];
+                     [textString appendString:@"\n"];
+                     
+                     GCVLocationInfo *locationInfo = (GCVLocationInfo *)[annotation.locations firstObject];
+                     [textString appendString:@"Location:"];
+                     [textString appendString:[@(locationInfo.latLng.latitude) stringValue]];
+                     [textString appendString:@","];
+                     [textString appendString:[@(locationInfo.latLng.longitude) stringValue]];
+                     [textString appendString:@"\n"];
+                     [textString appendString:@"\n"];
+                 }
+                 weakSelf.textView.text = textString;
+             }
+         }];
+    }];
 }
 
 @end

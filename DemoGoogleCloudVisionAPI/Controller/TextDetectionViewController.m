@@ -38,36 +38,39 @@
     
     [self beforeDtection];
     
-    __weak TextDetectionViewController *weakSelf = self;
-    self.textDetection = [[GCVTextDetection alloc] init];
-    [self.textDetection getTextDetection:[self preProcessImage]
-                               maxResult:20
-                              completion:^(GCVError *error)
-     {
-         [SVProgressHUD dismiss];
-         
-         [weakSelf afterDtection];
-         
-         [weakSelf removeBoundaryView];
-         
-         if (error) {
-             weakSelf.textView.text = error.message;
-         }
-         else {
-             NSMutableString *textString = [NSMutableString new];
-             for (GCVEntityAnnotation *annotation in weakSelf.textDetection.annotations) {
-                 [textString appendString:annotation.annotationsDescription];
-                 [textString appendString:@" ("];
-                 [textString appendString:@"Language: "];
-                 [textString appendString:annotation.locale];
-                 [textString appendString:@")"];
-                 [textString appendString:@"\n"];
-             }
-             weakSelf.textView.text = textString;
+    [self preProcessImage:^(NSString *imageString) {
+
+        __weak TextDetectionViewController *weakSelf = self;
+        self.textDetection = [[GCVTextDetection alloc] init];
+        [self.textDetection getTextDetection:imageString
+                                   maxResult:10
+                                  completion:^(GCVError *error)
+         {
+             [SVProgressHUD dismiss];
              
-             [weakSelf addBoundaryView];
-         }
-     }];
+             [weakSelf afterDtection];
+             
+             [weakSelf removeBoundaryView];
+             
+             if (error) {
+                 weakSelf.textView.text = error.message;
+             }
+             else {
+                 NSMutableString *textString = [NSMutableString new];
+                 for (GCVEntityAnnotation *annotation in weakSelf.textDetection.annotations) {
+                     [textString appendString:annotation.annotationsDescription];
+                     [textString appendString:@" ("];
+                     [textString appendString:@"Language: "];
+                     [textString appendString:annotation.locale];
+                     [textString appendString:@")"];
+                     [textString appendString:@"\n"];
+                 }
+                 weakSelf.textView.text = textString;
+                 
+                 [weakSelf addBoundaryView];
+             }
+         }];
+    }];
 }
 
 - (void)removeBoundaryView {

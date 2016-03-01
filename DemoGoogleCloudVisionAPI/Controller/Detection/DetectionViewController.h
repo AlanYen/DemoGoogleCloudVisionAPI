@@ -19,7 +19,7 @@
 @property (assign, nonatomic) CGFloat scaleRatioForDisplay;
 @property (strong, nonatomic) UIImage *image;
 
-- (NSString *)preProcessImage;
+- (void)preProcessImage:(void (^)(NSString *))completion;
 - (void)beforeDtection;
 - (void)afterDtection;
 - (CGRect)translateRect:(CGRect)rect;

@@ -41,78 +41,81 @@
     
     [SVProgressHUD show];
     
-    __weak FaceDetectionViewController *weakSelf = self;
-    self.faceDetection = [[GCVFaceDetection alloc] init];
-    [self.faceDetection getFaceDetection:[self preProcessImage]
-                               maxResult:10
-                              completion:^(GCVError *error)
-     {
-         [SVProgressHUD dismiss];
-         
-         [weakSelf afterDtection];
-         
-         if (error) {
-             weakSelf.textView.text = error.message;
-         }
-         else {
-             // Get number of faces detected
-             NSInteger numPeopleDetected = [self.faceDetection.annotations count];
-             NSString *peopleStr = [NSString stringWithFormat:@"%lu", (unsigned long)numPeopleDetected];
-             NSString *faceStr1 = @"People detected: ";
-             NSString *faceStr2 = @"\n\nEmotions detected:\n";
-             weakSelf.textView.text = [NSString stringWithFormat:@"%@%@%@", faceStr1, peopleStr, faceStr2];
+    [self preProcessImage:^(NSString *imageString) {
+        
+        __weak FaceDetectionViewController *weakSelf = self;
+        self.faceDetection = [[GCVFaceDetection alloc] init];
+        [self.faceDetection getFaceDetection:imageString
+                                   maxResult:10
+                                  completion:^(GCVError *error)
+         {
+             [SVProgressHUD dismiss];
              
-             NSMutableDictionary *emotionTotals =
-             [NSMutableDictionary dictionaryWithObjects:@[@0.0, @0.0, @0.0, @0.0]
-                                                forKeys:@[@"sorrow", @"joy", @"surprise", @"anger"]];
-             NSDictionary *emotionLikelihoods = @{@"VERY_LIKELY": @0.9,
-                                                  @"LIKELY": @0.75,
-                                                  @"POSSIBLE": @0.5,
-                                                  @"UNLIKELY": @0.25,
-                                                  @"VERY_UNLIKELY": @0.0};
+             [weakSelf afterDtection];
              
-             // Sum all detected emotions
-             for (GCVFaceAnnotation *faceAnnotation in weakSelf.faceDetection.annotations) {
-                 
-                 NSString *emotion = @"joy";
-                 NSString *likelihood = faceAnnotation.joyLikelihood;
-                 double newValue = [emotionLikelihoods[likelihood] doubleValue] + [emotionTotals[emotion] doubleValue];
-                 NSNumber *tempNumber = [[NSNumber alloc] initWithDouble:newValue];
-                 [emotionTotals setValue:tempNumber forKey:emotion];
-                 
-                 emotion = @"sorrow";
-                 likelihood = faceAnnotation.sorrowLikelihood;
-                 newValue = [emotionLikelihoods[likelihood] doubleValue] + [emotionTotals[emotion] doubleValue];
-                 tempNumber = [[NSNumber alloc] initWithDouble:newValue];
-                 [emotionTotals setValue:tempNumber forKey:emotion];
-                 
-                 emotion = @"surprise";
-                 likelihood = faceAnnotation.surpriseLikelihood;
-                 newValue = [emotionLikelihoods[likelihood] doubleValue] + [emotionTotals[emotion] doubleValue];
-                 tempNumber = [[NSNumber alloc] initWithDouble:newValue];
-                 [emotionTotals setValue:tempNumber forKey:emotion];
-                 
-                 emotion = @"anger";
-                 likelihood = faceAnnotation.angerLikelihood;
-                 newValue = [emotionLikelihoods[likelihood] doubleValue] + [emotionTotals[emotion] doubleValue];
-                 tempNumber = [[NSNumber alloc] initWithDouble:newValue];
-                 [emotionTotals setValue:tempNumber forKey:emotion];
+             if (error) {
+                 weakSelf.textView.text = error.message;
              }
-             
-             // Get emotion likelihood as a % and display it in the UI
-             for (NSString *emotion in emotionTotals) {
-                 double emotionSum = [emotionTotals[emotion] doubleValue];
-                 double totalPeople = [weakSelf.faceDetection.annotations count];
-                 double likelihoodPercent = emotionSum / totalPeople;
-                 NSString *percentString = [[NSString alloc] initWithFormat:@"%2.0f%%", (likelihoodPercent * 100)];
-                 NSString *emotionPercentString = [NSString stringWithFormat:@"%@%@%@%@", emotion, @": ", percentString, @"\r\n"];
-                 weakSelf.textView.text = [weakSelf.textView.text stringByAppendingString:emotionPercentString];
+             else {
+                 // Get number of faces detected
+                 NSInteger numPeopleDetected = [self.faceDetection.annotations count];
+                 NSString *peopleStr = [NSString stringWithFormat:@"%lu", (unsigned long)numPeopleDetected];
+                 NSString *faceStr1 = @"People detected: ";
+                 NSString *faceStr2 = @"\n\nEmotions detected:\n";
+                 weakSelf.textView.text = [NSString stringWithFormat:@"%@%@%@", faceStr1, peopleStr, faceStr2];
+                 
+                 NSMutableDictionary *emotionTotals =
+                 [NSMutableDictionary dictionaryWithObjects:@[@0.0, @0.0, @0.0, @0.0]
+                                                    forKeys:@[@"sorrow", @"joy", @"surprise", @"anger"]];
+                 NSDictionary *emotionLikelihoods = @{@"VERY_LIKELY": @0.9,
+                                                      @"LIKELY": @0.75,
+                                                      @"POSSIBLE": @0.5,
+                                                      @"UNLIKELY": @0.25,
+                                                      @"VERY_UNLIKELY": @0.0};
+                 
+                 // Sum all detected emotions
+                 for (GCVFaceAnnotation *faceAnnotation in weakSelf.faceDetection.annotations) {
+                     
+                     NSString *emotion = @"joy";
+                     NSString *likelihood = faceAnnotation.joyLikelihood;
+                     double newValue = [emotionLikelihoods[likelihood] doubleValue] + [emotionTotals[emotion] doubleValue];
+                     NSNumber *tempNumber = [[NSNumber alloc] initWithDouble:newValue];
+                     [emotionTotals setValue:tempNumber forKey:emotion];
+                     
+                     emotion = @"sorrow";
+                     likelihood = faceAnnotation.sorrowLikelihood;
+                     newValue = [emotionLikelihoods[likelihood] doubleValue] + [emotionTotals[emotion] doubleValue];
+                     tempNumber = [[NSNumber alloc] initWithDouble:newValue];
+                     [emotionTotals setValue:tempNumber forKey:emotion];
+                     
+                     emotion = @"surprise";
+                     likelihood = faceAnnotation.surpriseLikelihood;
+                     newValue = [emotionLikelihoods[likelihood] doubleValue] + [emotionTotals[emotion] doubleValue];
+                     tempNumber = [[NSNumber alloc] initWithDouble:newValue];
+                     [emotionTotals setValue:tempNumber forKey:emotion];
+                     
+                     emotion = @"anger";
+                     likelihood = faceAnnotation.angerLikelihood;
+                     newValue = [emotionLikelihoods[likelihood] doubleValue] + [emotionTotals[emotion] doubleValue];
+                     tempNumber = [[NSNumber alloc] initWithDouble:newValue];
+                     [emotionTotals setValue:tempNumber forKey:emotion];
+                 }
+                 
+                 // Get emotion likelihood as a % and display it in the UI
+                 for (NSString *emotion in emotionTotals) {
+                     double emotionSum = [emotionTotals[emotion] doubleValue];
+                     double totalPeople = [weakSelf.faceDetection.annotations count];
+                     double likelihoodPercent = emotionSum / totalPeople;
+                     NSString *percentString = [[NSString alloc] initWithFormat:@"%2.0f%%", (likelihoodPercent * 100)];
+                     NSString *emotionPercentString = [NSString stringWithFormat:@"%@%@%@%@", emotion, @": ", percentString, @"\r\n"];
+                     weakSelf.textView.text = [weakSelf.textView.text stringByAppendingString:emotionPercentString];
+                 }
+                 
+                 [weakSelf addBoundaryView];
+                 [weakSelf addLandmarkView];
              }
-             
-             [weakSelf addBoundaryView];
-             [weakSelf addLandmarkView];
-         }
-     }];
+         }];
+    }];
 }
 
 - (void)removeBoundaryView {

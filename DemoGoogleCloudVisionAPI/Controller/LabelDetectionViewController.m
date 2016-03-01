@@ -38,31 +38,34 @@
     
     [self beforeDtection];
     
-    __weak LabelDetectionViewController *weakSelf = self;
-    self.labelDetection = [[GCVLabelDetection alloc] init];
-    [self.labelDetection getLabelDetection:[self preProcessImage]
-                                 maxResult:10
-                                completion:^(GCVError *error)
-     {
-         [SVProgressHUD dismiss];
-         
-         [weakSelf afterDtection];
+    [self preProcessImage:^(NSString *imageString) {
 
-         if (error) {
-             weakSelf.textView.text = error.message;
-         }
-         else {
-             NSMutableString *textString = [NSMutableString new];
-             for (GCVEntityAnnotation *annotation in weakSelf.labelDetection.annotations) {
-                 [textString appendString:annotation.annotationsDescription];
-                 [textString appendString:@" ("];
-                 [textString appendString:[@(annotation.score) stringValue]];
-                 [textString appendString:@")"];
-                 [textString appendString:@"\n"];
+        __weak LabelDetectionViewController *weakSelf = self;
+        self.labelDetection = [[GCVLabelDetection alloc] init];
+        [self.labelDetection getLabelDetection:imageString
+                                     maxResult:10
+                                    completion:^(GCVError *error)
+         {
+             [SVProgressHUD dismiss];
+             
+             [weakSelf afterDtection];
+             
+             if (error) {
+                 weakSelf.textView.text = error.message;
              }
-             weakSelf.textView.text = textString;
-         }
-     }];
+             else {
+                 NSMutableString *textString = [NSMutableString new];
+                 for (GCVEntityAnnotation *annotation in weakSelf.labelDetection.annotations) {
+                     [textString appendString:annotation.annotationsDescription];
+                     [textString appendString:@" ("];
+                     [textString appendString:[@(annotation.score) stringValue]];
+                     [textString appendString:@")"];
+                     [textString appendString:@"\n"];
+                 }
+                 weakSelf.textView.text = textString;
+             }
+         }];
+    }];
 }
 
 @end

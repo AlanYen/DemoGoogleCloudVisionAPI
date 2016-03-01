@@ -70,23 +70,28 @@
     return newImage;
 }
 
-- (NSString *)preProcessImage {
+- (void)preProcessImage:(void (^)(NSString *))completion {
     
-    NSData *imagedata = UIImagePNGRepresentation(self.image);
-    NSUInteger dataLength = [imagedata length];
-    // simple way to process image
-    if (dataLength > 4194304) {
-        CGFloat scale = ((CGFloat)4194304 / dataLength);
-        CGSize oldSize = [self.image size];
-        CGSize newSize = CGSizeMake((oldSize.width * scale),
-                                    (oldSize.height / oldSize.width * (oldSize.width * scale)));
-        self.image = [self resizeImage:self.image toSize:newSize];
-        imagedata = UIImagePNGRepresentation(self.image);
-    }
-    NSLog(@"Image size: (%zd bytes)", [imagedata length]);
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     
-    NSString *base64String = [imagedata base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithCarriageReturn];
-    return base64String;
+        NSData *imagedata = UIImagePNGRepresentation(self.image);
+        NSUInteger dataLength = [imagedata length];
+        // simple way to process image
+        if (dataLength > 4194304) {
+            CGFloat scale = ((CGFloat)4194304 / dataLength);
+            CGSize oldSize = [self.image size];
+            CGSize newSize = CGSizeMake((oldSize.width * scale),
+                                        (oldSize.height / oldSize.width * (oldSize.width * scale)));
+            self.image = [self resizeImage:self.image toSize:newSize];
+            imagedata = UIImagePNGRepresentation(self.image);
+        }
+        NSLog(@"Image size: (%zd bytes)", [imagedata length]);
+        
+        NSString *base64String = [imagedata base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithCarriageReturn];
+        if (completion) {
+            completion(base64String);
+        }
+    });
 }
 
 - (void)beforeDtection {
