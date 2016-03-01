@@ -35,15 +35,19 @@
 - (void)processDetection {
     
     [SVProgressHUD show];
-    [self processImage];
+    
+    [self beforeDtection];
     
     __weak LabelDetectionViewController *weakSelf = self;
     self.labelDetection = [[GCVLabelDetection alloc] init];
-    [self.labelDetection getLabelDetection:[self base64EncodeImage:self.image]
+    [self.labelDetection getLabelDetection:[self preProcessImage]
                                  maxResult:10
                                 completion:^(GCVError *error)
      {
          [SVProgressHUD dismiss];
+         
+         [weakSelf afterDtection];
+
          if (error) {
              weakSelf.textView.text = error.message;
          }

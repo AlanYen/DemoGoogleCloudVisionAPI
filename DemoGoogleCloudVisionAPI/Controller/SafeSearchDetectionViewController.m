@@ -35,15 +35,19 @@
 - (void)processDetection {
     
     [SVProgressHUD show];
-    [self processImage];
+    
+    [self beforeDtection];
     
     __weak SafeSearchDetectionViewController *weakSelf = self;
     self.safeSearchDetection = [[GCVSafeSearchDetection alloc] init];
-    [self.safeSearchDetection getSafeSearchDetection:[self base64EncodeImage:self.image]
+    [self.safeSearchDetection getSafeSearchDetection:[self preProcessImage]
                                        maxResult:10
                                       completion:^(GCVError *error)
      {
          [SVProgressHUD dismiss];
+         
+         [weakSelf afterDtection];
+
          if (error) {
              weakSelf.textView.text = error.message;
          }

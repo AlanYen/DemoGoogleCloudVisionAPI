@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[DetectionViewController preProcessImage]:DetectionViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "imagedata.length">
+            </PersistentString>
+            <PersistentString
+               value = "[imagedata length]">
+            </PersistentString>
+            <PersistentString
+               value = "dataLength">
+            </PersistentString>
+            <PersistentString
+               value = "self.image">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[DetectionViewController base64EncodeImage:]:DetectionViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "image">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[DetectionViewController postProcessImage]:DetectionViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "image">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[DetectionViewController imagePickerController:didFinishPickingMediaWithInfo:]:DetectionViewController.m">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

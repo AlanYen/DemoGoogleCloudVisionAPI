@@ -16,11 +16,13 @@
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageViewWidthConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageViewHeightConstraint;
+@property (assign, nonatomic) CGFloat scaleRatioForDisplay;
 @property (strong, nonatomic) UIImage *image;
 
-- (NSString *)base64EncodeImage:(UIImage *)image;
-- (void)processImage;
-- (void)processDetection;
+- (NSString *)preProcessImage;
+- (void)beforeDtection;
+- (void)afterDtection;
+- (CGRect)translateRect:(CGRect)rect;
 
 @end
 

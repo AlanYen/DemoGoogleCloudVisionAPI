@@ -63,44 +63,68 @@
 
 - (UIImage *)resizeImage:(UIImage *)image toSize:(CGSize)newSize {
     
-    UIGraphicsBeginImageContext(newSize);
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, image.scale);
     [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return newImage;
 }
 
-- (NSString *)base64EncodeImage:(UIImage *)image {
+- (NSString *)preProcessImage {
     
-    NSData *imagedata = UIImagePNGRepresentation(image);
-    // Resize the image if it exceeds the 2MB API limit
-    if ([imagedata length] > 2097152) {
-        CGSize oldSize = [image size];
-        CGSize newSize = CGSizeMake(800, oldSize.height / oldSize.width * 800);
-        image = [self resizeImage: image toSize: newSize];
-        imagedata = UIImagePNGRepresentation(image);
+    NSData *imagedata = UIImagePNGRepresentation(self.image);
+    NSUInteger dataLength = [imagedata length];
+    // simple way to process image
+    if (dataLength > 4194304) {
+        CGFloat scale = ((CGFloat)4194304 / dataLength);
+        CGSize oldSize = [self.image size];
+        CGSize newSize = CGSizeMake((oldSize.width * scale),
+                                    (oldSize.height / oldSize.width * (oldSize.width * scale)));
+        self.image = [self resizeImage:self.image toSize:newSize];
+        imagedata = UIImagePNGRepresentation(self.image);
     }
+    NSLog(@"Image size: (%zd bytes)", [imagedata length]);
+    
     NSString *base64String = [imagedata base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithCarriageReturn];
     return base64String;
 }
 
-- (void)processImage {
+- (void)beforeDtection {
+    
+    self.imageView.image = nil;
+    self.textView.text = @"";
+}
+
+- (void)afterDtection {
     
     CGFloat containerWidth = CGRectGetWidth(self.containerView.frame);
     CGFloat containerHeight = CGRectGetHeight(self.containerView.frame);
-    if (self.image.size.width >= containerWidth) {
-        CGFloat newHeight = (self.image.size.height * (containerWidth / self.image.size.width));
-        self.image = [self resizeImage:self.image toSize:CGSizeMake(containerWidth, newHeight)];
+ 
+    UIImage *image = self.image;
+    if (image.size.width >= containerWidth) {
+        CGFloat newHeight = (image.size.height * (containerWidth / image.size.width));
+        image = [self resizeImage:image toSize:CGSizeMake(containerWidth, newHeight)];
     }
-    if (self.image.size.height >= containerHeight) {
-        CGFloat newWidth = (self.image.size.width * (containerHeight / self.image.size.height));
-        self.image = [self resizeImage:self.image toSize:CGSizeMake(newWidth, containerHeight)];
+    if (image.size.height >= containerHeight) {
+        CGFloat newWidth = (image.size.width * (containerHeight / image.size.height));
+        image = [self resizeImage:image toSize:CGSizeMake(newWidth, containerHeight)];
     }
     
-    self.imageView.image = self.image;
-    self.imageViewWidthConstraint.constant = self.image.size.width;
-    self.imageViewHeightConstraint.constant = self.image.size.height;
+    self.scaleRatioForDisplay = (image.size.width / self.image.size.width);
+    
+    self.imageView.image = image;
+    self.imageViewWidthConstraint.constant = image.size.width;
+    self.imageViewHeightConstraint.constant = image.size.height;
     self.textView.text = @"";
+}
+
+- (CGRect)translateRect:(CGRect)rect {
+    
+    CGRect newRect = CGRectMake(rect.origin.x * self.scaleRatioForDisplay,
+                                rect.origin.y * self.scaleRatioForDisplay,
+                                rect.size.width * self.scaleRatioForDisplay,
+                                rect.size.height * self.scaleRatioForDisplay);
+    return newRect;
 }
 
 - (void)processDetection {

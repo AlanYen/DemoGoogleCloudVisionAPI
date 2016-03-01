@@ -35,15 +35,18 @@
 - (void)processDetection {
     
     [SVProgressHUD show];
-    [self processImage];
+    
+    [self beforeDtection];
     
     __weak TextDetectionViewController *weakSelf = self;
     self.textDetection = [[GCVTextDetection alloc] init];
-    [self.textDetection getTextDetection:[self base64EncodeImage:self.image]
+    [self.textDetection getTextDetection:[self preProcessImage]
                                maxResult:20
                               completion:^(GCVError *error)
      {
          [SVProgressHUD dismiss];
+         
+         [weakSelf afterDtection];
          
          [weakSelf removeBoundaryView];
          
@@ -87,7 +90,8 @@
             GCVVertice *vertice2 = [boundingPoly.vertices objectAtIndex:2];
             CGFloat width = (vertice1.x - vertice0.x);
             CGFloat height = (vertice2.y - vertice0.y);
-            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(vertice0.x, vertice0.y, width, height)];
+            CGRect rect = [self translateRect:CGRectMake(vertice0.x, vertice0.y, width, height)];
+            UIView *view = [[UIView alloc] initWithFrame:rect];
             view.tag = tag++;
             view.backgroundColor = [UIColor clearColor];
             view.layer.borderColor = [UIColor redColor].CGColor;

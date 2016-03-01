@@ -37,17 +37,19 @@
     // Remove Boundary / Landmark View
     [self removeBoundaryView];
     [self removeLandmarkView];
+    [self beforeDtection];
     
     [SVProgressHUD show];
-    [self processImage];
     
     __weak FaceDetectionViewController *weakSelf = self;
     self.faceDetection = [[GCVFaceDetection alloc] init];
-    [self.faceDetection getFaceDetection:[self base64EncodeImage:self.image]
+    [self.faceDetection getFaceDetection:[self preProcessImage]
                                maxResult:10
                               completion:^(GCVError *error)
      {
          [SVProgressHUD dismiss];
+         
+         [weakSelf afterDtection];
          
          if (error) {
              weakSelf.textView.text = error.message;
@@ -133,7 +135,8 @@
             GCVVertice *vertice2 = [boundingPoly.vertices objectAtIndex:2];
             CGFloat width = (vertice1.x - vertice0.x);
             CGFloat height = (vertice2.y - vertice0.y);
-            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(vertice0.x, vertice0.y, width, height)];
+            CGRect rect = [self translateRect:CGRectMake(vertice0.x, vertice0.y, width, height)];
+            UIView *view = [[UIView alloc] initWithFrame:rect];
             view.tag = tag++;
             view.backgroundColor = [UIColor clearColor];
             view.layer.borderColor = [UIColor redColor].CGColor;
@@ -159,7 +162,8 @@
         for (GCVLandmark *landmark in faceAnnotation.landmarks) {
             CGFloat x = (CGFloat)landmark.gcvPosition.x;
             CGFloat y = (CGFloat)landmark.gcvPosition.y;
-            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(x, y, 5.0, 5.0)];
+            CGRect rect = [self translateRect:CGRectMake(x, y, 5.0, 5.0)];
+            UIView *view = [[UIView alloc] initWithFrame:rect];
             view.tag = tag++;
             view.backgroundColor = [self colorByLandmarkType:landmark.type];
             [self.imageView addSubview:view];

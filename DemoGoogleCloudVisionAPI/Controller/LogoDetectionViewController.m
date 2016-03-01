@@ -35,15 +35,19 @@
 - (void)processDetection {
     
     [SVProgressHUD show];
-    [self processImage];
+    
+    [self beforeDtection];
     
     __weak LogoDetectionViewController *weakSelf = self;
     self.logoDetection = [[GCVLogoDetection alloc] init];
-    [self.logoDetection getLogoDetection:[self base64EncodeImage:self.image]
+    [self.logoDetection getLogoDetection:[self preProcessImage]
                                maxResult:10
                               completion:^(GCVError *error)
      {
          [SVProgressHUD dismiss];
+         
+         [weakSelf afterDtection];
+
          if (error) {
              weakSelf.textView.text = error.message;
          }

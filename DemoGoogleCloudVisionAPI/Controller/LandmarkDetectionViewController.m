@@ -35,15 +35,19 @@
 - (void)processDetection {
     
     [SVProgressHUD show];
-    [self processImage];
+    
+    [self beforeDtection];
     
     __weak LandmarkDetectionViewController *weakSelf = self;
     self.landmarkDetection = [[GCVLandmarkDetection alloc] init];
-    [self.landmarkDetection getLandmarkDetection:[self base64EncodeImage:self.image]
+    [self.landmarkDetection getLandmarkDetection:[self preProcessImage]
                                        maxResult:10
                                       completion:^(GCVError *error)
      {
          [SVProgressHUD dismiss];
+         
+         [weakSelf afterDtection];
+         
          if (error) {
              weakSelf.textView.text = error.message;
          }
